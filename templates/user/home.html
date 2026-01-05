@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}User Home{% endblock %}
+
+{% block content %}
+<h3 class="mb-4">Available Tiffins</h3>
+
+<div class="row">
+    {% for tiffin in tiffins %}
+    <div class="col-md-4">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ tiffin.title }}</h5>
+                <p class="card-text">{{ tiffin.description }}</p>
+                <h6>₹ {{ tiffin.price }}</h6>
+
+                <form method="post" action="/place-order/{{ tiffin.id }}/">
+                    {% csrf_token %}
+                    <button class="btn btn-success btn-sm mt-2">Order Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No tiffins available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Invoice{% endblock %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-body">
+        <h4 class="mb-3">Invoice</h4>
+
+        <p><strong>Invoice No:</strong> {{ invoice.invoice_number }}</p>
+        <p><strong>Order ID:</strong> {{ invoice.order.id }}</p>
+        <p><strong>Customer:</strong> {{ invoice.order.customer.name }}</p>
+        <p><strong>Amount:</strong> ₹ {{ invoice.order.total_amount }}</p>
+        <p><strong>Date:</strong> {{ invoice.created_at }}</p>
+
+        <hr>
+        <p class="text-muted">Thank you for using our Tiffin Service.</p>
+    </div>
+</div>
+{% endblock %}
