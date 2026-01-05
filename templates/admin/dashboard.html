@@ -1,62 +1,83 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+{% extends "base.html" %}
+{% block title %}Admin Dashboard | OTSS{% endblock %}
 
-<nav class="navbar navbar-dark bg-dark px-4">
-    <a class="navbar-brand" href="#">OTSS Admin</a>
-    <div>
-        <a href="/order-report/" class="btn btn-outline-light btn-sm">Orders</a>
-        <a href="/invoice-report/" class="btn btn-outline-light btn-sm">Invoices</a>
-        <a href="/sales-report/" class="btn btn-outline-light btn-sm">Sales</a>
-        <a href="/admin/logout/" class="btn btn-danger btn-sm">Logout</a>
+{% block content %}
+
+<h3 class="mb-4 fw-bold">Admin Dashboard</h3>
+
+<div class="row g-4">
+
+    <!-- TOTAL USERS -->
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0 text-center">
+            <div class="card-body">
+                <h6 class="text-muted">Total Users</h6>
+                <h3 class="fw-bold">{{ total_users }}</h3>
+            </div>
+        </div>
     </div>
-</nav>
 
-<div class="container mt-4">
-    <div class="row g-3">
-
-        <div class="col-md-3">
-            <div class="card text-center shadow">
-                <div class="card-body">
-                    <h6>Total Users</h6>
-                    <h3>{{ total_users }}</h3>
-                </div>
+    <!-- TOTAL ORDERS -->
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0 text-center">
+            <div class="card-body">
+                <h6 class="text-muted">Total Orders</h6>
+                <h3 class="fw-bold">{{ total_orders }}</h3>
             </div>
         </div>
-
-        <div class="col-md-3">
-            <div class="card text-center shadow">
-                <div class="card-body">
-                    <h6>Total Orders</h6>
-                    <h3>{{ total_orders }}</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card text-center shadow">
-                <div class="card-body">
-                    <h6>Delivered Orders</h6>
-                    <h3>{{ delivered_orders }}</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card text-center shadow">
-                <div class="card-body">
-                    <h6>Total Sales</h6>
-                    <h3>₹ {{ total_sales }}</h3>
-                </div>
-            </div>
-        </div>
-
     </div>
+
+    <!-- DELIVERED ORDERS -->
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0 text-center">
+            <div class="card-body">
+                <h6 class="text-muted">Delivered Orders</h6>
+                <h3 class="fw-bold text-success">{{ delivered_orders }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOTAL SALES -->
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0 text-center">
+            <div class="card-body">
+                <h6 class="text-muted">Total Sales</h6>
+                <h3 class="fw-bold text-primary">₹ {{ total_sales }}</h3>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-</body>
-</html>
+<hr class="my-4">
+
+<!-- QUICK LINKS -->
+<div class="row g-3">
+
+    <div class="col-md-3">
+        <a href="/admin/" class="btn btn-outline-dark w-100">
+            Manage Orders
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a href="/order-report/" class="btn btn-outline-primary w-100">
+            Order Report
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a href="/invoice-report/" class="btn btn-outline-success w-100">
+            Invoice Report
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a href="/sales-report/" class="btn btn-outline-warning w-100">
+            Sales Report
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

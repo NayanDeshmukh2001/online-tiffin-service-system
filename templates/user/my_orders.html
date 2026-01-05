@@ -1,38 +1,66 @@
 {% extends "base.html" %}
-
-{% block title %}My Orders{% endblock %}
+{% block title %}My Orders | OTSS{% endblock %}
 
 {% block content %}
-<h3 class="mb-4">My Orders</h3>
 
-<table class="table table-bordered table-striped shadow">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Status</th>
-            <th>Amount</th>
-            <th>Date</th>
-            <th>Invoice</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for order in orders %}
-        <tr>
-            <td>{{ order.id }}</td>
-            <td>{{ order.status }}</td>
-            <td>₹ {{ order.total_amount }}</td>
-            <td>{{ order.order_date }}</td>
-            <td>
-                {% if order.status == 'DELIVERED' %}
-                    <a class="btn btn-sm btn-primary" href="/invoice/{{ order.id }}/">View</a>
-                {% else %}
-                    <span class="text-muted">Not Available</span>
-                {% endif %}
-            </td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="5">No orders</td></tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h3 class="mb-4 fw-bold">My Orders</h3>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+
+        <table class="table table-striped table-hover mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Status</th>
+                    <th>Amount</th>
+                    <th>Order Date</th>
+                    <th>Invoice</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+
+                    <td>
+                        {% if order.status == "DELIVERED" %}
+                            <span class="badge bg-success">Delivered</span>
+                        {% elif order.status == "CONFIRMED" %}
+                            <span class="badge bg-primary">Confirmed</span>
+                        {% elif order.status == "CANCELLED" %}
+                            <span class="badge bg-danger">Cancelled</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">New</span>
+                        {% endif %}
+                    </td>
+
+                    <td>₹ {{ order.total_amount }}</td>
+
+                    <td>{{ order.order_date }}</td>
+
+                    <td>
+                        {% if order.status == "DELIVERED" %}
+                            <a href="/invoice/{{ order.id }}/"
+                               class="btn btn-sm btn-outline-success">
+                                View Invoice
+                            </a>
+                        {% else %}
+                            <span class="text-muted">Not Available</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center p-4">
+                        No orders placed yet.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
 {% endblock %}
